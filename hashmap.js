@@ -74,4 +74,35 @@ export default class HashMap {
         const result = this.get(key);
         return (result !== null);
     }
+
+    remove(key) {
+        const keyHash = this.hash(key);
+
+        if (!this.#buckets[keyHash]) {
+            return false;
+        }
+
+        let node = this.#buckets[keyHash].head;
+        let i = 0;
+
+        while (node) {
+            if (node.value.key === key) {
+                this.#buckets[keyHash].removeAt(i);
+                return true;
+            }
+            i++;
+        }
+
+        if (i === 0) {
+            if (node.next) {
+                this.#buckets[keyHash].removeAt(i);
+            }
+            else {
+                this.#buckets[keyHash] = null;
+            }
+            return true;
+        }
+
+        return false;
+    }
 }
