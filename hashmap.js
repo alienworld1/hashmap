@@ -127,4 +127,40 @@ export default class HashMap {
         })
         return result;
     }
+
+    get values() {
+        const result = [];
+        this.#buckets.forEach(element => {
+            let node = element.head;
+            while(node) {
+                result.push(node.value.value);
+                node = node.next;
+            }
+        })
+        return result;        
+    }
+
+    get entries() {
+        const result = [];
+        this.#buckets.forEach(element => {
+            let node = element.head;
+            while(node) {
+                result.push([node.value.key, node.value.value]);
+                node = node.next;
+            }
+        })
+        return result;
+    }
+
+    resize() {
+        const newSize = this.#size * 2;
+        const entries = this.entries;
+
+        this.clear();
+        this.#size = newSize;
+
+        for (const entry of entries) {
+            this.set(entry[0], entry[1]);
+        }
+    }
 }
