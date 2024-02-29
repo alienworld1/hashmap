@@ -50,4 +50,23 @@ export default class HashMap {
         }
 
     }
+
+    get(key) {
+        const keyHash = this.hash(key);
+
+        if (!this.#buckets[keyHash]) {
+            return null;
+        }
+
+        let node = this.#buckets[keyHash].head;
+
+        while (node) {
+            if (node.value.key === key) {
+                return node.value.value;
+            }
+            node = node.next;
+        }
+
+        return null;
+    }
 }
