@@ -22,9 +22,7 @@ export default class HashMap {
       }
     
     constructor() {
-        this.#size = 32;
-        this.#capacity = 0;
-        this.#buckets = [];
+        this.clear();
     }
 
     set(key, value) {
@@ -110,5 +108,11 @@ export default class HashMap {
 
     get length() {
         return this.#capacity;
+    }
+
+    clear() {
+        this.#size = 32;
+        this.#capacity = 0;
+        this.#buckets = [];
     }
 }
