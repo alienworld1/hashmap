@@ -88,6 +88,7 @@ export default class HashMap {
         while (node) {
             if (node.value.key === key) {
                 this.#buckets[keyHash].removeAt(i);
+                this.#capacity--;
                 return true;
             }
             i++;
@@ -100,9 +101,14 @@ export default class HashMap {
             else {
                 this.#buckets[keyHash] = null;
             }
+            this.#capacity--;
             return true;
         }
 
         return false;
+    }
+
+    get length() {
+        return this.#capacity;
     }
 }
