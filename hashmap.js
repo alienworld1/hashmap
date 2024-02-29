@@ -115,4 +115,16 @@ export default class HashMap {
         this.#capacity = 0;
         this.#buckets = [];
     }
+
+    get keys() {
+        const result = [];
+        this.#buckets.forEach(element => {
+            let node = element.head;
+            while(node) {
+                result.push(node.value.key);
+                node = node.next;
+            }
+        })
+        return result;
+    }
 }
