@@ -69,4 +69,9 @@ export default class HashMap {
 
         return null;
     }
+
+    has(key) {
+        const result = this.get(key);
+        return (result !== null);
+    }
 }
